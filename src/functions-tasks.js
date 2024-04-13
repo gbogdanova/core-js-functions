@@ -76,8 +76,10 @@ function getArgumentsCount(funcs) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  return function inside(x) {
+    return x ** exponent;
+  };
 }
 
 /**
@@ -93,8 +95,19 @@ function getPowerFunction(/* exponent */) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-  throw new Error('Not implemented');
+function getPolynom(...coefficients) {
+  if (coefficients.length === 0) {
+    return null;
+  }
+
+  return function polynome(x) {
+    const len = coefficients.length;
+    let result = 0;
+    for (let i = 0; i < len; i += 1) {
+      result += coefficients[i] * x ** (len - i - 1);
+    }
+    return result;
+  };
 }
 
 /**
@@ -112,6 +125,10 @@ function getPolynom() {
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
 function memoize(/* func */) {
+  // const cash = {};
+  // return function(...args) {
+
+  // }
   throw new Error('Not implemented');
 }
 
@@ -174,8 +191,10 @@ function logger(/* func, logFunc */) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(/* fn, ...args1 */) {
-  throw new Error('Not implemented');
+function partialUsingArguments(fn, ...args1) {
+  return function func(...args) {
+    return fn(...args1, ...args);
+  };
 }
 
 /**
